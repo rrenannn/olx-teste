@@ -1,8 +1,8 @@
 package main
 
 import (
-	"main/go/controllers"
-	"main/go/routes"
+	"main/controllers"
+	"main/routes"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,7 +15,7 @@ func main() {
 	r.Static("/img", "./img")
 
 	// Serve the index.html file
-	r.LoadHTMLFiles("./html/index.html", "./html/taxa.html", "./html/importante.html", "./html/inicial.html", "./html/dados.html", "./html/pagamento-taxa.html", "./html/inicial.html")
+	r.LoadHTMLFiles("./public/index.html", "./public/taxa.html", "./public/importante.html", "./public/inicial.html", "./public/dados.html", "./public/pagamento-taxa.html", "./public/inicial.html")
 
 	routes.SetupRoutes(r)
 
