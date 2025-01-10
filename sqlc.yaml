@@ -1,0 +1,9 @@
+version: "2"
+sql:
+  - engine: "sqlite" # Ou "postgresql" se estiver usando PostgreSQL
+    queries: "./sql/queries" # Diretório onde estão as consultas SQL
+    schema: "./sql/schema"   # Diretório onde está o esquema do banco de dados
+    gen:
+      go:
+        package: "db"        # Nome do pacote Go gerado
+        out: "./db"          # Diretório onde o código Go será gerado
