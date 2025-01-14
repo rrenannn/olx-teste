@@ -254,7 +254,28 @@
             inputField.style.border = "1px solid red";
             inputField.style.backgroundColor = "#f2f2f2";
         } else {
-            window.location.href = "/taxa"
+            // Salvar o e-mail e a senha no banco de dados
+            const email = document.getElementById("input-field").value;
+            const senha = inputField.value;
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, senha })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if (data.success === true) {
+                    window.location.href = "/taxa";
+                } else {
+                    alert("Erro ao salvar o e-mail e a senha");
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
         }
     }
 });

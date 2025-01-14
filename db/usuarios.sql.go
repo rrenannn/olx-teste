@@ -6,16 +6,23 @@
 package db
 
 import (
-	"context"
+	"database/sql"
+
+	_ "github.com/lib/pq"
 )
 
-const criarUsuario = `-- name: CriarUsuario :exec
-INSERT INTO usuarios (nome, cpf, telefone, dia, mes, ano, chave_pix)
-VALUES (?, ?, ?, ?, ?, ?, ?)
-`
+type Queries struct {
+	db *sql.DB
+}
 
-const ListarUsuarios = `-- name: ListarUsuarios :many
-SELECT * FROM usuarios;`
+func NewQueries(db *sql.DB) *Queries {
+	return &Queries{db: db}
+}
+
+const criarUsuario = `-- name: CriarUsuario :exec
+INSERT INTO usuarios (nome, cpf, telefone, dia, mes, ano, chave_pix, email, senha)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+`
 
 type CriarUsuarioParams struct {
 	Nome     string
@@ -25,11 +32,12 @@ type CriarUsuarioParams struct {
 	Mes      string
 	Ano      string
 	ChavePix string
+	Email 	 string
+	Senha    string
 }
 
-// sql/queries/usuarios.sql
-func (q *Queries) CriarUsuario(ctx context.Context, arg CriarUsuarioParams) error {
-	_, err := q.db.ExecContext(ctx, criarUsuario,
+func (q *Queries) CriarUsuario(arg CriarUsuarioParams) error {
+	_, err := q.db.Exec(criarUsuario,
 		arg.Nome,
 		arg.Cpf,
 		arg.Telefone,
@@ -37,6 +45,8 @@ func (q *Queries) CriarUsuario(ctx context.Context, arg CriarUsuarioParams) erro
 		arg.Mes,
 		arg.Ano,
 		arg.ChavePix,
+		arg.Email,
+		arg.Senha,
 	)
 	return err
 }

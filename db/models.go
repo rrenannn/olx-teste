@@ -13,4 +13,6 @@ type Usuario struct {
 	Mes      string
 	Ano      string
 	ChavePix string
+	Email    string
+	Senha 	 string
 }
